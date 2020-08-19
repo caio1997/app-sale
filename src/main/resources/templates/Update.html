@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Edit Product</title>
+    <meta charset="UTF-8"/>
+    <a href="/product">All Products</a>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <style>
+        table, th, td {
+            border: 1px solid #5f5f5f;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Edit Product</h1>
+<form method="post", action="/product/update">
+
+    <label>Product:</label> <span th:text="${productUpdate.id}"></span>
+    <br>
+    <input type="hidden" th:value="${productUpdate.id}" th:field="${productUpdate.id}" name="id" />
+
+    <label>Name:</label>
+    <input type="text" placeholder="Name" th:value="${productUpdate.name}" name="name" required/>
+    <input type="text" placeholder="Description" th:value="${productUpdate.description}" name="description" required/>
+    <input type="number" step="0.01" placeholder="Price" th:value="${productUpdate.price}" name="price" required/>
+    <input type="text" placeholder="Quantity" step="0.01" th:value="${productUpdate.quantity}" name="quantity" required/>
+    <br>
+    <br>
+    <br>
+    <input type="submit" value="Save" />
+    <input type="reset"  value="Cancel"/>
+</form>
+<script src="../js/jquery-3.5.0.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>

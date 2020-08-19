@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>New Product</title>
+    <a href="/product">All Products</a>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+</head>
+<body>
+<form class="form-horizontal" method="post", action="/product/new">
+    <h1 class="titulo">New Product</h1>
+    <div class="panel panel-default">
+        <div class="form-group row">
+            <label for="nameProduct" class="col-sm-1 col-form-label">Name:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="nameProduct" name="name" placeholder="Name"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="descriptionProduct" class="col-sm-1 col-form-label">Description:</label>
+            <div class="col-sm-6">
+                <input type="text"  class="form-control" id="descriptionProduct" name="description" placeholder="Description"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="priceProduct" class="col-sm-1 col-form-label">Price:</label>
+            <div class="col-sm-6">
+                <input type="number" step="0.01" class="form-control" id="priceProduct" name="price" placeholder="$"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="quantityProduct" class="col-sm-1 col-form-label">Quantity:</label>
+            <div class="col-sm-6">
+                <input type="number" step="0.01" class="form-control" id="quantityProduct" name="quantity" placeholder="Quantity"/>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-primary", th:type="submit">Register</button>
+        </div>
+    </div>
+</form>
+
+<script src="../js/jquery-3.5.0.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>
