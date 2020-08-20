@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Edit Product</title>
     <meta charset="UTF-8"/>
@@ -21,7 +20,7 @@
         <input type="hidden" th:value="${product.id}" th:field="*{id}"/>
         <input type="text" th:field="*{name}" class="form-control mb-4 col-4"  placeholder="Name"/>
         <input type="text" th:field="*{description}" class="form-control mb-4 col-4"  placeholder="Description"/>
-        <input type="number" th:field="*{price}" class="form-control mb-4 col-4"  placeholder="$"/>
+        <input type="number" th:field="*{price}" step="0.01" class="form-control mb-4 col-4"  placeholder="$"/>
         <input type="number" th:field="*{quantity}" step="0.01" class="form-control mb-4 col-4"  placeholder="Quantity"/>
 
         <button type="button" class="btn btn-primary", th:type="submit">Register</button>
