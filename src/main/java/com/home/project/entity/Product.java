@@ -10,18 +10,18 @@ public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     @NotNull
-    private String name;
+    public String name;
 
-    private String description;
-
-    @NotNull
-    private Double quantity;
+    public String description;
 
     @NotNull
-    private Double price;
+    public Double quantity;
+
+    @NotNull
+    public Double price;
 
     public Product(){
     }

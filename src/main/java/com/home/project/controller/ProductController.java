@@ -4,10 +4,12 @@ import com.home.project.entity.Product;
 import com.home.project.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/product")
@@ -17,21 +19,21 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ModelAndView findAll(){
-        ModelAndView mv = new ModelAndView("ListProducts");
-        List<Product> listProduct = productService.findAll();
-        mv.addObject("product", listProduct);
-        return mv;
+    public String findAll(Model model){
+        model.addAttribute("ListProducts", productService.findAll());
+        return "ListProducts";
     }
 
     @GetMapping("/new")
-    public String save(){
+    public String save(Model model) {
+        Product product = new Product();
+        model.addAttribute("product", product);
         return "NewProduct";
     }
 
-    @PostMapping("/new")
-    public String save(@Valid Product product){
-        Product productSave = productService.save(product);
+    @PostMapping("/save")
+    public String save(@ModelAttribute ("product") Product product){
+        productService.save(product);
         return "redirect:/product";
     }
 
@@ -50,18 +52,11 @@ public class ProductController {
         return "redirect:/product";
     }
 
+
     @GetMapping("/update")
-    public ModelAndView update(@RequestParam Long id){
-
-        ModelAndView mv = new ModelAndView("Update");
+    public String update(@RequestParam Long id, Model model){
         Product product = productService.getOne(id);
-        mv.addObject("productUpdate",  product);
-        return mv;
-    }
-
-    @PostMapping("/update")
-    public String update(@RequestParam Long id, @ModelAttribute Product product){
-        Product prod = productService.save(product);
-        return "redirect:/product";
+        model.addAttribute("product", product);
+        return "Update";
     }
 }
