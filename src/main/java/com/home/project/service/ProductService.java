@@ -26,7 +26,6 @@ public class ProductService {
             throw new RuntimeException("Product not found for id: " + id);
         }
         return product;
-
     }
 
     public void delete(Long id) { productRepository.deleteById(id); }
@@ -45,7 +44,4 @@ public class ProductService {
     */
 
     public Product getOne(Long id) { return productRepository.getOne(id);}
-
-
-
 }

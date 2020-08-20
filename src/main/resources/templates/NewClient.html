@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>New Client</title>
+    <a href="/client">All Client</a>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+</head>
+<body>
+<div class="container">
+    <h1>Clients</h1>
+    <hr>
+    <h2>Save Client</h2>
+    <form action="#" method="post" th:action="@{/client/save}" th:object="${client}" >
+
+        <input type="text" name="name" class="form-control mb-4 col-4"  placeholder="Name"/>
+        <input type="text" name="lastName" class="form-control mb-4 col-4"  placeholder="LastName"/>
+        <input type="email" name="email" class="form-control mb-4 col-4"  placeholder="Email"/>
+
+        <button type="button" class="btn btn-primary", th:type="submit">Register</button>
+    </form>
+</div>
+<script src="../js/jquery-3.5.0.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+</body>
+</html>
