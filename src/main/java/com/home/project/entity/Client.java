@@ -1,11 +1,9 @@
 package com.home.project.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +22,10 @@ public class Client {
     @NotNull
     @Email
     public String email;
+
+    @OneToMany
+    @JoinColumn(name = "ID_CLIENT")
+    public List<Sale> saleList;
 
     public Client(){
     }
@@ -65,6 +67,14 @@ public class Client {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Sale> getSaleList() {
+        return saleList;
+    }
+
+    public void setSaleList(List<Sale> saleList) {
+        this.saleList = saleList;
     }
 
     @Override

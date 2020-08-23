@@ -3,6 +3,7 @@ package com.home.project.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,15 +24,31 @@ public class Product implements Serializable {
     @NotNull
     public Double price;
 
+    @ManyToMany
+    @JoinTable(
+            name = "SALE_PRODUCTS",
+            //uniqueConstraints = @UniqueConstraint(columnNames = {"ID_PRODUCT", "ID_SALE"}),
+            joinColumns = {@JoinColumn(name = "ID_PRODUCT")},
+            inverseJoinColumns = {@JoinColumn(name = "ID_SALE")})
+    public List<Sale> sales;
+
     public Product(){
     }
 
     public Product(Long id, String name, String description, Double quantity, Double price) {
         this.id = id;
         this.name = name;
+        this.description = description;
         this.quantity = quantity;
         this.price = price;
-        this.description = description;
+    }
+
+    public List<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(List<Sale> sales) {
+        this.sales = sales;
     }
 
     public Long getId() { return id; }
