@@ -23,7 +23,7 @@ public class Sale implements Serializable {
     @ManyToMany
     @JoinTable(
             name = "SALE_PRODUCTS",
-            //uniqueConstraints = @UniqueConstraint(columnNames = {"ID_SALE", "ID_PRODUCT"}),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"ID_SALE", "ID_PRODUCT"}),
             joinColumns = {@JoinColumn(name = "ID_SALE")},
             inverseJoinColumns = {@JoinColumn(name = "ID_PRODUCT")})
     public List<Product> products;

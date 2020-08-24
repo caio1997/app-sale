@@ -42,38 +42,65 @@ public class SaleController {
         return "NewSale";
     }
 
+    @PostMapping("/save")
+    public String save(@ModelAttribute ("sale") Sale sale){
+        saleService.save(sale);
+        return "redirect:/sale/saveProductsInSale?id=" + sale.getId();
+    }
+
     @PostMapping("/saleproduct")
     public String addProduct(@ModelAttribute Product product, @RequestParam Long id){
 
         Sale sale = saleService.getOne(id);
-        product = productService.getOne(product.getId());
+        product = productService.getOne(product.id)
+;        System.out.println("------------------------------------------------");
+        System.out.println(product);
+        System.out.println(product.getId());
+        System.out.println(product.getName());
+
+        System.out.println(sale);
+        System.out.println(sale.getId());
+        System.out.println(sale.getProducts());
+        System.out.println(sale.getClient().getName());
+        System.out.println("------------------------------------------------");
 
         sale.getProducts().add(product);
         saleService.save(sale);
 
-        return "redirect:/sale/details?id=" + sale.getId();
+        return "redirect:/sale/saveProductsInSale?id=" + sale.getId();
     }
 
-    @PostMapping("/save")
-    public String save(@ModelAttribute ("sale") Sale sale){
-        saleService.save(sale);
-        return "redirect:/sale";
-    }
+    @GetMapping("/saveProductsInSale")
+    public ModelAndView saveProductsInSale(@RequestParam Long id){
 
-    @GetMapping("/details")
-    public ModelAndView findById(@RequestParam Long id){
-        ModelAndView mv = new ModelAndView("FindSale");
         Sale saleFind = saleService.getOne(id);
+        ModelAndView mv = new ModelAndView("AddProductInSale");
+        mv.addObject("findsale",saleFind);
         List<Product> list = new ArrayList<>();
         list.addAll(saleFind.getProducts());
         for(int i = 0; i < saleFind.getProducts().stream().count(); i++){
             System.out.println(list.get(i).getName());
         }
+        mv.addObject("listProduct", list);
         List<Product> productNoAdd = productService.findAll();
         productNoAdd.removeAll(saleFind.getProducts());
-        mv.addObject("listProduct", list);
         mv.addObject("products", productNoAdd);
+
+        return mv;
+    }
+
+    @GetMapping("/details")
+    public ModelAndView findById(@RequestParam Long id){
+
+        Sale saleFind = saleService.getOne(id);
+        ModelAndView mv = new ModelAndView("FindSale");
         mv.addObject("findsale",saleFind);
+        List<Product> list = new ArrayList<>();
+        list.addAll(saleFind.getProducts());
+        for(int i = 0; i < saleFind.getProducts().stream().count(); i++){
+            System.out.println(list.get(i).getName());
+        }
+        mv.addObject("listProduct", list);
         return mv;
     }
 

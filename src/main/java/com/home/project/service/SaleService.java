@@ -20,14 +20,14 @@ public class SaleService {
 
     public Sale save(Sale sale) { return saleRepository.save(sale); }
 
-    public Optional<Sale> findById(Long id) {
+    public Sale findById(Long id) {
         Optional<Sale> sale = saleRepository.findById(id);
         if (sale.isPresent()) {
             sale.get();
         } else {
             throw new RuntimeException("Product not found for id: " + id);
         }
-        return sale;
+        return sale.get();
     }
 
     public void delete(Long id) { saleRepository.deleteById(id); }
